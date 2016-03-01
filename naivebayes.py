@@ -68,7 +68,7 @@ class Model:
                 print df_confusion
 
 if __name__ == "__main__":
-        model = Model("/Users/sajid/Documents/Spring2016/CIS732/car-sample-aff-dataset/lymphtrain.arff")
+        model = Model("/home/lymph_train.arff")
         model.GetValues()
         model.TrainClassifier()
-        model.TestClassifier("/Users/sajid/Documents/Spring2016/CIS732/car-sample-aff-dataset/lymphtest.arff")
+        model.TestClassifier("/home/lymph_test.arff")
