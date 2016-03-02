@@ -2,6 +2,7 @@ from __future__ import division
 import pandas as pd
 import collections
 import math
+import sys
 
 class Model:
         def __init__(self, arffFile):
@@ -66,9 +67,15 @@ class Model:
                 y_pred = pd.Series(y_prediction, name='Predicted')
                 df_confusion = pd.crosstab(y_actu, y_pred, rownames=['Actual'], colnames=['Predicted'], margins=True)
                 print df_confusion
+                
+                '''
+                print('prediction set {0}').format(y_prediction)
+                print '\n'
+                print('actual set {0}').format(y_actual)
+                '''
 
 if __name__ == "__main__":
-        model = Model("/home/lymph_train.arff")
+        model = Model(sys.argv[1]) # argv[1] contains training file
         model.GetValues()
         model.TrainClassifier()
-        model.TestClassifier("/home/lymph_test.arff")
+        model.TestClassifier(sys.argv[2]) #argv[2] contains test file
