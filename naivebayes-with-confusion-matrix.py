@@ -2,6 +2,7 @@ from __future__ import division
 import pandas as pd
 import collections
 import math
+import random
 import sys
 
 class Model:
@@ -68,11 +69,15 @@ class Model:
                 df_confusion = pd.crosstab(y_actu, y_pred, rownames=['Actual'], colnames=['Predicted'], margins=True)
                 print df_confusion
                 
-                '''
-                print('prediction set {0}').format(y_prediction)
-                print '\n'
-                print('actual set {0}').format(y_actual)
-                '''
+
+        def splitDataset(self, dataset, splitRatio):
+       	        trainSize = int(len(dataset) * splitRatio)
+       	        trainSet = []
+       	        copyFeatureVectors = self.featureVectors
+   	        while len(self.featureVectors) < trainSize:
+  		    index = random.randrange(len(copyFeatureVectors))
+  		    trainSet.append(copyFeatureVectors.pop(index))
+   	        return [trainSet, copyFeatureVectors]
 
 if __name__ == "__main__":
         model = Model(sys.argv[1]) # argv[1] contains training file
